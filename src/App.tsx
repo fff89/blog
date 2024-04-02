@@ -1,11 +1,13 @@
-import RichEditor from "./components/RichEditor";
+// import RichEditor from "./components/RichEditor";
 
+import Test from "./Test";
 function App() {
 
   return (
-    <>
-      <RichEditor />
-    </>
+    <div>
+      <Test />
+
+    </div>
   )
 }
 

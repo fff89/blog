@@ -5,21 +5,22 @@ import {
 } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { Color } from "@tiptap/extension-color";
-import React, { useEffect } from 'react'
 import TextStyle from '@tiptap/extension-text-style'
 import { Instruct } from "./extensions/instruct";
+// import Image from '@tiptap/extension-image'
 
 export default () => {
   const editor = useEditor({
     extensions: [
-      
+      TextStyle,
+      Color,
       Instruct,
       StarterKit,
       // Document,
       // Paragraph,
       // Text,
-      TextStyle,
-      Color,
+      
+      // Image
     ],
 
     content: `
@@ -28,14 +29,6 @@ export default () => {
       </p>
     `,
   })
-
-  const [isEditable, setIsEditable] = React.useState(true)
-
-  useEffect(() => {
-    if (editor) {
-      editor.setEditable(isEditable)
-    }
-  }, [isEditable, editor])
 
   const handleRemove = () => {
     if (!editor) return
@@ -64,23 +57,22 @@ export default () => {
     //   ]
     // }).run()
     // editor.chain().focus().setColor('#F98181').run()
-    editor.chain().insertContent({
-      type: 'emoji',
-      attrs: {
-        emoji: '😀',
-      },
-    }).run();
+    // editor.chain().insertContent({
+    //   type: 'emoji',
+    //   attrs: {
+    //     emoji: '😀',
+    //   },
+    // }).run();
+    // editor.chain().setImage({
+    //   src: 'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png'
+    // }).run()
   }
 
 
   return (
-    <>
+    <div>
       <button onClick={handleRemove}>删除</button>
       <button onClick={handleInContent}>插入内容</button>
-      <div>
-        <input type="checkbox" checked={isEditable} onChange={() => setIsEditable(!isEditable)} />
-        Editable
-      </div>
 
       {editor && <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
         <button
@@ -103,6 +95,6 @@ export default () => {
         </button>
       </BubbleMenu>}
       <EditorContent editor={editor} onBlur={onEditorBlur} />
-    </>
+    </div>
   )
 }
